@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #FFF5F7 0%, #F8EFF3 50%, #E8D5F2 100%);
+    min-height: 100vh;
+    color: #5C4A54;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 181, 216, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(255, 181, 216, 0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.header-title h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #5C4A54;
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+.heart-icon {
+    color: #FFB5D8;
+}
+
+.sparkles-icon {
+    color: #E8D5F2;
+}
+
+.header-subtitle {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: #9B8A93;
+    font-size: 1rem;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* New Post Form */
+.new-post-card {
+    background: linear-gradient(135deg, rgba(255, 181, 216, 0.1) 0%, rgba(232, 213, 242, 0.1) 100%);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: 2px solid rgba(255, 181, 216, 0.2);
+    margin-bottom: 2rem;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: #5C4A54;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: white;
+    border: 2px solid rgba(255, 181, 216, 0.2);
+    border-radius: 2rem;
+    font-size: 1rem;
+    color: #5C4A54;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #FFB5D8;
+}
+
+.textarea-field {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: white;
+    border: 2px solid rgba(255, 181, 216, 0.2);
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    color: #5C4A54;
+    resize: none;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.textarea-field:focus {
+    outline: none;
+    border-color: #FFB5D8;
+}
+
+.image-input-group {
+    margin-bottom: 1rem;
+}
+
+.image-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #5C4A54;
+}
+
+.icon-small {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #D5F0FF;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 0.875rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary {
+    flex: 1;
+    background: #FFB5D8;
+    color: #5C4A54;
+}
+
+.btn-primary:hover {
+    background: #ff9fc7;
+}
+
+.btn-secondary {
+    padding: 0.875rem 1.5rem;
+    background: white;
+    color: #5C4A54;
+    border: 2px solid rgba(255, 181, 216, 0.2);
+}
+
+.btn-secondary:hover {
+    background: #F8EFF3;
+}
+
+/* Posts */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.post-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    border: 2px solid rgba(255, 181, 216, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.post-card:hover {
+    box-shadow: 0 4px 16px rgba(255, 181, 216, 0.2);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.post-author {
+    color: #FFB5D8;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: #9B8A93;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #9B8A93;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 159, 181, 0.1);
+    color: #FF9FB5;
+}
+
+.post-image {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.post-content {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 181, 216, 0.1);
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.like-btn {
+    color: #FFB5D8;
+}
+
+.like-btn:hover {
+    background: rgba(255, 181, 216, 0.1);
+}
+
+.comment-btn {
+    color: #E8D5F2;
+}
+
+.comment-btn:hover {
+    background: rgba(232, 213, 242, 0.1);
+}
+
+.like-icon {
+    fill: #FFB5D8;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+.empty-state p {
+    font-size: 1.125rem;
+    color: #9B8A93;
+}
+
+/* Footer */
+.footer {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid rgba(255, 181, 216, 0.2);
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: #9B8A93;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .header-title h1 {
+        font-size: 1.5rem;
+    }
+    
+    .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    .new-post-card {
+        padding: 1.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .btn-primary {
+        width: 100%;
+    }
+}
