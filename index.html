@@ -6,91 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosso Cantinho 💕</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAKeF8WWCd-aiph-e2YhnhuUzf9o26EKkQ",
+            authDomain: "nosso-cantinho-64578.firebaseapp.com",
+            databaseURL: "https://nosso-cantinho-64578-default-rtdb.firebaseio.com",
+            projectId: "nosso-cantinho-64578",
+            storageBucket: "nosso-cantinho-64578.appspot.com",
+            messagingSenderId: "820005937946",
+            appId: "1:820005937946:web:adebdd66f13b2179c582a3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth(app);
+
+        window.database = database;
+        window.ref = ref;
+        window.push = push;
+        window.onValue = onValue;
+        window.auth = auth;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.signOut = signOut;
+        window.onAuthStateChanged = onAuthStateChanged;
+    </script>
 </head>
 
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-title">
-                <svg class="icon heart-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                </svg>
+    <!-- Login -->
+    <div id="loginCard" class="login-card">
+        <h2>Entrar no Cantinho 💕</h2>
+        <form id="loginForm">
+            <input type="email" id="emailInput" placeholder="Email" required>
+            <input type="password" id="passwordInput" placeholder="Senha" required>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+        <p id="loginError" class="hidden">Email ou senha incorretos 😢</p>
+    </div>
+
+    <!-- Blog -->
+    <div id="blogContent" class="hidden">
+        <header class="header">
+            <div class="header-content">
                 <h1>Nosso Cantinho</h1>
-                <svg class="icon sparkles-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path
-                        d="M12 3v4M12 17v4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M3 12h4M17 12h4M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" />
-                </svg>
+                <button id="logoutBtn" class="btn btn-secondary">Sair</button>
             </div>
-            <p class="header-subtitle">Nosso mini twitter para compartilhar coisas do dia a dia ✨ <br> <strong>feliz no simples</strong>
-            </p>
-            
-        </div>
-    </header>
+        </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- New Post Form -->
-        <div class="new-post-card">
-            <h2 class="form-title">✨ Romantize sua rotina aqui ✨</h2>
-            <form id="postForm">
-                <div class="form-group">
-                    <input type="text" id="authorInput" placeholder="Seu nome" class="input-field" required>
-                </div>
-                <div class="form-group hidden" id="expandedForm">
-                    <textarea id="contentInput" placeholder="O que está acontecendo? 💭" rows="4" class="textarea-field"
-                        required></textarea>
+        <main class="container">
+            <div class="new-post-card">
+                <h2>✨ Romantize sua rotina aqui ✨</h2>
+                <form id="postForm">
+                    <textarea id="contentInput" placeholder="O que está acontecendo? 💭" rows="4" required></textarea>
+                    <button type="submit" class="btn btn-primary">Postar</button>
+                </form>
+            </div>
 
-                    <div class="image-input-group">
-                        <div class="image-label">
-                            <svg class="icon-small" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <path d="M21 15l-5-5L5 21" />
-                            </svg>
-                            <label>URL da imagem (opcional)</label>
-                        </div>
-                        <input type="url" id="imageInput" placeholder="https://..." class="input-field">
-                    </div>
+            <div id="postsContainer" class="posts-container"></div>
+            <div id="emptyState" class="empty-state hidden">
+                <p>Nenhum post ainda... 🌸</p>
+            </div>
+        </main>
+    </div>
 
-                    <div class="button-group">
-                        <button type="submit" class="btn btn-primary">
-                            <svg class="icon-small" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <line x1="22" y1="2" x2="11" y2="13" />
-                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                            </svg>
-                            Postar
-                        </button>
-                        <button type="button" id="cancelBtn" class="btn btn-secondary">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Posts Container -->
-        <div id="postsContainer" class="posts-container">
-            <!-- Posts will be added here dynamically -->
-        </div>
-
-        <!-- Empty State -->
-        <div id="emptyState" class="empty-state hidden">
-            <p>Nenhum post ainda... Que tal compartilhar algo? 🌸</p>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>Feito com 💕 para guardar nossos melhores momentos</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
