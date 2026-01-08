@@ -343,3 +343,84 @@ body {
         width: 100%;
     }
 }
+
+/* =========================
+   AJUSTES PARA CELULAR
+   ========================= */
+@media (max-width: 768px) {
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  .header {
+    padding: 1.5rem 1rem;
+  }
+
+  .header-title h1 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .header-subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .new-post-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .form-title {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .input-field,
+  .textarea-field {
+    font-size: 0.95rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .posts-container {
+    gap: 1rem;
+  }
+
+  .post-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .post-author {
+    font-size: 1rem;
+  }
+
+  .post-content {
+    font-size: 0.95rem;
+  }
+
+  .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .post-actions {
+    justify-content: space-around;
+  }
+
+}
