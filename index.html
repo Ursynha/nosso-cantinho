@@ -11,7 +11,6 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-app.js";
         import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-database.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAKeF8WWCd-aiph-e2YhnhuUzf9o26EKkQ",
@@ -25,55 +24,68 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        const auth = getAuth(app);
 
         window.database = database;
         window.ref = ref;
         window.push = push;
         window.onValue = onValue;
-        window.auth = auth;
-        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-        window.signOut = signOut;
-        window.onAuthStateChanged = onAuthStateChanged;
     </script>
 </head>
 
 <body>
-    <!-- Login -->
-    <div id="loginCard" class="login-card">
-        <h2>Entrar no Cantinho 💕</h2>
-        <form id="loginForm">
-            <input type="email" id="emailInput" placeholder="Email" required>
-            <input type="password" id="passwordInput" placeholder="Senha" required>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-        </form>
-        <p id="loginError" class="hidden">Email ou senha incorretos 😢</p>
-    </div>
-
-    <!-- Blog -->
-    <div id="blogContent" class="hidden">
-        <header class="header">
-            <div class="header-content">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <svg class="icon heart-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
                 <h1>Nosso Cantinho</h1>
-                <button id="logoutBtn" class="btn btn-secondary">Sair</button>
+                <svg class="icon sparkles-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M12 3v4M12 17v4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M3 12h4M17 12h4M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" />
+                </svg>
             </div>
-        </header>
+            <p class="header-subtitle">Nosso mini twitter para compartilhar coisas do dia a dia ✨ <br> <strong>feliz no
+                    simples</strong></p>
+        </div>
+    </header>
 
-        <main class="container">
-            <div class="new-post-card">
-                <h2>✨ Romantize sua rotina aqui ✨</h2>
-                <form id="postForm">
-                    <textarea id="contentInput" placeholder="O que está acontecendo? 💭" rows="4" required></textarea>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- New Post Form -->
+        <div class="new-post-card">
+            <h2 class="form-title">✨ Romantize sua rotina aqui ✨</h2>
+            <form id="postForm">
+                <div class="form-group">
+                    <input type="text" id="authorInput" placeholder="Seu nome" class="input-field" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="contentInput" placeholder="O que está acontecendo? 💭" rows="4" class="textarea-field"
+                        required></textarea>
+                </div>
+                <div class="button-group">
                     <button type="submit" class="btn btn-primary">Postar</button>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
 
-            <div id="postsContainer" class="posts-container"></div>
-            <div id="emptyState" class="empty-state hidden">
-                <p>Nenhum post ainda... 🌸</p>
-            </div>
-        </main>
-    </div>
+        <!-- Posts Container -->
+        <div id="postsContainer" class="posts-container"></div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state hidden">
+            <p>Nenhum post ainda... Que tal compartilhar algo? 🌸</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Feito com 💕 para guardar nossos melhores momentos</p>
+        </div>
+    </footer>
 
     <script type="module" src="script.js"></script>
 </body>

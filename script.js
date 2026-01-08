@@ -1,53 +1,11 @@
 // DOM
-const loginForm = document.getElementById('loginForm');
-const emailInput = document.getElementById('emailInput');
-const passwordInput = document.getElementById('passwordInput');
-const loginCard = document.getElementById('loginCard');
-const blogContent = document.getElementById('blogContent');
-const loginError = document.getElementById('loginError');
-
 const postForm = document.getElementById('postForm');
+const authorInput = document.getElementById('authorInput');
 const contentInput = document.getElementById('contentInput');
 const postsContainer = document.getElementById('postsContainer');
 const emptyState = document.getElementById('emptyState');
-const logoutBtn = document.getElementById('logoutBtn');
 
-let userUid = null;
-
-// LOGIN
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  loginError.classList.add('hidden');
-
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value);
-    userUid = userCredential.user.uid;
-    console.log("Login bem-sucedido!", userUid);
-  } catch (err) {
-    console.error("Erro de login:", err.code, err.message);
-    loginError.classList.remove('hidden');
-  }
-});
-
-// Verifica se usuário está logado
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    userUid = user.uid;
-    loginCard.classList.add('hidden');
-    blogContent.classList.remove('hidden');
-    initPosts();
-  } else {
-    loginCard.classList.remove('hidden');
-    blogContent.classList.add('hidden');
-  }
-});
-
-// LOGOUT
-logoutBtn.addEventListener('click', () => {
-  signOut(auth);
-});
-
-// POSTS
+// Inicializar posts
 function initPosts() {
   const postsRef = ref(database, 'posts');
 
@@ -57,14 +15,16 @@ function initPosts() {
   });
 }
 
+// Enviar novo post
 postForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  const author = authorInput.value.trim();
   const content = contentInput.value.trim();
-  if (!content) return;
+  if (!author || !content) return;
 
   const postsRef = ref(database, 'posts');
   push(postsRef, {
-    uid: userUid,
+    author: author,
     content: content,
     date: new Date().toLocaleString()
   });
@@ -72,6 +32,7 @@ postForm.addEventListener('submit', (e) => {
   postForm.reset();
 });
 
+// Renderizar posts
 function renderPosts(data) {
   if (!data) {
     postsContainer.innerHTML = '';
@@ -83,6 +44,15 @@ function renderPosts(data) {
 
   const postsArray = Object.values(data).reverse();
   postsContainer.innerHTML = postsArray
-    .map(post => `<div class="post-card"><p>${post.content}</p><span>${post.date}</span></div>`)
+    .map(post => `
+      <div class="post-card">
+        <h3>${post.author}</h3>
+        <p>${post.content}</p>
+        <span>${post.date}</span>
+      </div>
+    `)
     .join('');
 }
+
+// Inicializar
+initPosts();
